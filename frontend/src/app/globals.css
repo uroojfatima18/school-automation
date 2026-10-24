@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F7F3EA;
+  --foreground: #1F2A24;
+  --surface: #FFFFFF;
+  --sidebar: #EFE8D8;
+  --border: #E8E0CF;
+  --primary: #2F6B4F;
+  --primary-hover: #265741;
+  --primary-light: #E3F0E8;
+  --accent: #E8833A;
+  --accent-light: #FCEBDD;
+  --text-primary: #1F2A24;
+  --text-muted: #6B7266;
+  --danger: #C4473A;
+  --success: #2F6B4F;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary-text: var(--text-primary);
+  --color-muted: var(--text-muted);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Dialog styles */
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+dialog {
+  border: none;
+  padding: 0;
+  max-width: 90vw;
+}
+
+dialog[open] {
+  animation: dialog-in 0.2s ease-out;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Toast slide-in animation */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Selection color */
+::selection {
+  background: var(--primary-light);
+  color: var(--text-primary);
+}
