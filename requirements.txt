@@ -1,0 +1,6 @@
+openai
+agents
+gspread
+google-auth
+python-dotenv
+twilio
