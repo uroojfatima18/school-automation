@@ -1,6 +1,6 @@
 # School Automation Assistant — Dashboard
 
-A professional admin dashboard for **Al-Noor Academy**, built as a frontend prototype for managing fee recovery and exam results in small private schools and academies in Pakistan.
+A professional admin dashboard for **Apex Academy**, built as a frontend prototype for managing fee recovery and exam results in small private schools and academies in Pakistan.
 
 ## Tech Stack
 

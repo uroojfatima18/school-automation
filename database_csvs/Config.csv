@@ -1,0 +1,34 @@
+APEX ACADEMY — SYSTEM CONFIGURATION & INTEGRATIONS,,
+Global institutional parameters, dynamic grading rules, and WhatsApp API configuration.,,
+,,
+1. INSTITUTIONAL SETTINGS,,
+Parameter / Key,Configured Value,Description / Notes
+School Name,Apex Academy,Brand name displayed on fee vouchers, report cards & messages
+School ID,school-001,Tenant identifier for multi-school API support
+Campus Address,Main Campus, Phase 5, DHA, Lahore,Physical campus location
+Helpline Phone,+92 300 1234567,Official school helpline number
+Currency Code,PKR,Currency unit for billing and vouchers
+Default Due Day,10,Day of the month when monthly fees become overdue (e.g. 10th)
+,,
+2. DYNAMIC GRADING RULES (Referenced by Marks Tab),,
+Parameter / Key,Configured Value,Description / Notes
+Grade A+ (Outstanding),90,Threshold: Percentage >= 90%
+Grade A (Excellent),80,Threshold: Percentage >= 80%
+Grade B (Very Good),70,Threshold: Percentage >= 70%
+Grade C (Good),60,Threshold: Percentage >= 60%
+Grade D (Pass),50,Threshold: Percentage >= 50%
+Grade F (Fail),0,Threshold: Percentage < 50%
+,,
+3. WHATSAPP CLOUD API & n8n AUTOMATION SETTINGS,,
+Parameter / Key,Configured Value,Description / Notes
+Meta App ID,YOUR_META_APP_ID,Meta Developer App Identifier
+WhatsApp Phone Number ID,YOUR_PHONE_NUMBER_ID,Assigned phone number ID from Meta Cloud API
+WABA ID,YOUR_WABA_ID,WhatsApp Business Account ID
+Permanent Access Token,YOUR_META_SYSTEM_USER_TOKEN,System user access token for WhatsApp Cloud API
+n8n Daily Cron Webhook,https://your-n8n-instance.com/webhook/fee-cron,Endpoint triggered daily at 09:00 AM PKT
+,,
+4. META APPROVED WHATSAPP MESSAGE TEMPLATES,,
+Parameter / Key,Configured Value,Description / Notes
+fee_reminder_pre_due,template_fee_pre_due_v1,Assalam-o-Alaikum {{parent_name}}, {{student_name}} ki {{month}} ki fee Rs. {{amount}} Due Date ({{due_date}}) tak jama karwayen. Shukriya - Apex Academy
+fee_reminder_overdue,template_fee_overdue_v1,Mohtaram {{parent_name}}, {{student_name}} ki {{month}} ki fee Rs. {{amount}} ki due date guzar chuki hai. Mazeed late fee se bachne ke liye fori ada karein.
+exam_result_card,template_result_card_v1,Assalam-o-Alaikum {{parent_name}}, {{student_name}} ka {{exam_type}} ka result card tayyar hai. Total: {{obtained}}/{{total}} ({{percentage}}%, Grade {{grade}}). Attached PDF check karein.

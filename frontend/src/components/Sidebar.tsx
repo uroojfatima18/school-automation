@@ -64,7 +64,7 @@ export function Sidebar() {
             </div>
             <div>
               <h1 className="text-sm font-bold text-primary-text leading-tight">
-                Al-Noor Academy
+                Apex Academy
               </h1>
               <p className="text-[10px] text-muted font-medium tracking-wide uppercase">
                 School Assistant

@@ -1,0 +1,9 @@
+APEX ACADEMY — EXECUTIVE AUTOMATION DASHBOARD,,,
+Live institutional performance metrics calculated in real-time from active records.,,,
+,,,
+,TOTAL STUDENTS,=COUNTA(Students!A4:A100),Enrolled Active Students
+,FEES COLLECTED (PKR),=SUMIF(Fees!I4:I100, "paid", Fees!G4:G100),Current Month Collection
+,PENDING & OVERDUE (PKR),=SUMIF(Fees!I4:I100, "<>paid", Fees!G4:G100),Unpaid Receivables
+,COLLECTION RATE,=C5/(C5+C6),Fee Recovery Efficiency
+,OVERDUE DEFAULTERS,=COUNTIF(Fees!I4:I100, "overdue"),Actionable Accounts
+,WHATSAPP MESSAGES LOGGED,=COUNTA(Logs!A4:A100),Total Dispatched Alerts

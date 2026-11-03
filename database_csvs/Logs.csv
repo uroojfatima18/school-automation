@@ -1,0 +1,8 @@
+APEX ACADEMY — WHATSAPP MESSAGE AUDIT TRAIL,,,,,,,,,
+Complete immutable record of all dispatched notifications, delivery receipts, and trigger sources.,,,,,,,,,
+Log_ID,Timestamp_PKT,Recipient_WhatsApp,Student_Name,Class,Message_Type,Template_Key,Delivery_Status,Meta_Message_ID,Trigger_Source
+LOG-001,2026-10-08 09:30:15,923001234567,Ahmed Khan,Class 10,Fee Reminder,fee_reminder_pre_due,Delivered,wamid.HBg...101,n8n_cron_morning
+LOG-002,2026-10-08 09:30:42,923012345678,Fatima Noor,Class 10,Fee Reminder,fee_reminder_pre_due,Delivered,wamid.HBg...102,n8n_cron_morning
+LOG-003,2026-10-15 10:15:20,923045678901,Usman Tariq,Class 8,Overdue Notice,fee_reminder_overdue,Delivered,wamid.HBg...105,n8n_cron_morning
+LOG-004,2026-10-18 11:00:05,923089012345,Hamza Iqbal,Class 6,Overdue Notice,fee_reminder_overdue,Delivered,wamid.HBg...109,admin_dashboard_manual
+LOG-005,2026-10-20 14:00:00,923001234567,Ahmed Khan,Class 10,Result Card PDF,exam_result_card,Delivered,wamid.HBg...201,admin_dashboard_manual

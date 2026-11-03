@@ -364,7 +364,7 @@ export default function ResultsPage() {
               <div className="flex items-center gap-3 mb-3">
                 <GraduationCap className="w-7 h-7" />
                 <div>
-                  <h2 className="text-lg font-bold">Al-Noor Academy</h2>
+                  <h2 className="text-lg font-bold">Apex Academy</h2>
                   <p className="text-xs opacity-80">Result Card — {previewResult.examType} Examination</p>
                 </div>
               </div>
@@ -444,7 +444,7 @@ export default function ResultsPage() {
             {/* Footer */}
             <div className="px-5 py-3 bg-[#F7F3EA] text-center">
               <p className="text-[10px] text-muted">
-                This is a computer-generated result card from Al-Noor Academy School Automation System
+                This is a computer-generated result card from Apex Academy School Automation System
               </p>
             </div>
           </div>

@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "School Automation Assistant — Al-Noor Academy",
+  title: "School Automation Assistant — Apex Academy",
   description:
-    "Manage fee recovery and exam results for Al-Noor Academy. A complete school management dashboard.",
+    "Manage fee recovery and exam results for Apex Academy. A complete school management dashboard.",
 };
 
 export default function RootLayout({

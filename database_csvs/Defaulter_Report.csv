@@ -1,0 +1,10 @@
+APEX ACADEMY — LATE FEE DEFAULTERS & DISPATCH QUEUE,,,,,,,,
+Prioritized list of overdue accounts. Used directly by n8n to send WhatsApp reminders.,,,,,,,,
+,TOTAL DEFAULTERS:,=COUNTIF(Fees!I4:I100, "overdue"),,TOTAL OVERDUE AMOUNT:,=SUMIF(Fees!I4:I100, "overdue", Fees!G4:G100),,,
+,,,,,,,,
+Student_ID,Student_Name,Class,Parent_WhatsApp,Billing_Month,Unpaid_Amount_PKR,Days_Overdue,Dispatch_Priority,WhatsApp_Status
+s5,Usman Tariq,Class 8,923045678901,October 2026,1912-04-26 00:00:00,14,HIGH,Ready to Send
+s7,Bilal Ahmad,Class 7,923067890123,October 2026,1912-04-26 00:00:00,14,HIGH,Ready to Send
+s9,Hamza Iqbal,Class 6,923089012345,October 2026,1910-12-13 00:00:00,14,URGENT,Sent - Awaiting Reply
+s21,Saad Qureshi,Class 10,923201234567,October 2026,1913-09-08 00:00:00,14,URGENT,Sent - Awaiting Reply
+s29,Kashif Mehmood,Class 10,923289012345,October 2026,1913-09-08 00:00:00,14,URGENT,Sent - Awaiting Reply

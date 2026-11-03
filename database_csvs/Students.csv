@@ -1,0 +1,38 @@
+APEX ACADEMY — ENROLLED STUDENTS DIRECTORY,,,,,,,,,,
+Master student registry with normalized WhatsApp contact numbers and standardized monthly fee rates.,,,,,,,,,,
+Student_ID,Roll_No,Student_Name,Father_Name,Gender,Class,Section,Parent_WhatsApp,Monthly_Fee_PKR,Admission_Date,Status
+s1,1,Ahmed Khan,Imran Khan,Male,Class 10,A,923001234567,1913-09-08 00:00:00,2023-04-01,Active
+s2,2,Fatima Noor,Noor Muhammad,Female,Class 10,A,923012345678,1913-09-08 00:00:00,2023-04-01,Active
+s3,1,Hassan Ali,Ali Raza,Male,Class 9,A,923023456789,1913-09-08 00:00:00,2023-04-01,Active
+s4,2,Aisha Bibi,Muhammad Azam,Female,Class 9,A,923034567890,1913-09-08 00:00:00,2023-04-01,Active
+s5,1,Usman Tariq,Tariq Mehmood,Male,Class 8,A,923045678901,1912-04-26 00:00:00,2023-04-01,Active
+s6,2,Zainab Akhtar,Akhtar Hussain,Female,Class 8,A,923056789012,1912-04-26 00:00:00,2024-04-01,Active
+s7,1,Bilal Ahmad,Ahmad Shah,Male,Class 7,A,923067890123,1912-04-26 00:00:00,2024-04-01,Active
+s8,2,Maryam Fatima,Fateh Muhammad,Female,Class 7,A,923078901234,1912-04-26 00:00:00,2024-04-01,Active
+s9,1,Hamza Iqbal,Iqbal Ahmed,Male,Class 6,A,923089012345,1910-12-13 00:00:00,2024-04-01,Active
+s10,2,Sana Malik,Malik Riaz,Female,Class 6,A,923090123456,1910-12-13 00:00:00,2024-04-01,Active
+s11,1,Owais Raza,Raza Hussain,Male,Class 5,A,923101234567,1910-12-13 00:00:00,2024-04-01,Active
+s12,2,Hira Nawaz,Nawaz Sharif,Female,Class 5,A,923112345678,1910-12-13 00:00:00,2024-04-01,Active
+s13,1,Talha Saeed,Saeed Anwar,Male,Class 4,A,923123456789,1909-07-31 00:00:00,2025-04-01,Active
+s14,2,Nimra Hassan,Hassan Raza,Female,Class 4,A,923134567890,1909-07-31 00:00:00,2025-04-01,Active
+s15,1,Daniyal Sheikh,Sheikh Rashid,Male,Class 3,A,923145678901,1909-07-31 00:00:00,2025-04-01,Active
+s16,2,Amna Rahim,Rahim Dad,Female,Class 3,A,923156789012,1909-07-31 00:00:00,2025-04-01,Active
+s17,1,Umer Farooq,Farooq Ahmad,Male,Class 2,A,923167890123,1908-03-18 00:00:00,2025-04-01,Active
+s18,2,Khadija Aslam,Aslam Pervez,Female,Class 2,A,923178901234,1908-03-18 00:00:00,2025-04-01,Active
+s19,1,Arsalan Javed,Javed Akhtar,Male,Class 1,A,923189012345,1908-03-18 00:00:00,2026-04-01,Active
+s20,2,Iqra Yousaf,Yousaf Ali,Female,Class 1,A,923190123456,1908-03-18 00:00:00,2026-04-01,Active
+s21,3,Saad Qureshi,Qureshi Sahab,Male,Class 10,B,923201234567,1913-09-08 00:00:00,2023-04-01,Active
+s22,3,Rabia Shahid,Shahid Afridi,Female,Class 9,B,923212345678,1913-09-08 00:00:00,2023-04-01,Active
+s23,3,Farhan Mustafa,Mustafa Kamal,Male,Class 8,B,923223456789,1912-04-26 00:00:00,2024-04-01,Active
+s24,3,Mahnoor Amir,Amir Sohail,Female,Class 7,B,923234567890,1912-04-26 00:00:00,2024-04-01,Active
+s25,3,Junaid Saleem,Saleem Baig,Male,Class 6,B,923245678901,1910-12-13 00:00:00,2024-04-01,Active
+s26,3,Ayesha Kamran,Kamran Akmal,Female,Class 5,B,923256789012,1910-12-13 00:00:00,2024-04-01,Active
+s27,3,Waqar Zaman,Zaman Khan,Male,Class 4,B,923267890123,1909-07-31 00:00:00,2025-04-01,Active
+s28,3,Nadia Parveen,Parvez Elahi,Female,Class 3,B,923278901234,1909-07-31 00:00:00,2025-04-01,Active
+s29,4,Kashif Mehmood,Mehmood Ghaznavi,Male,Class 10,B,923289012345,1913-09-08 00:00:00,2023-04-01,Active
+s30,4,Sidra Batool,Batool Shah,Female,Class 9,B,923290123456,1913-09-08 00:00:00,2023-04-01,Active
+s31,4,Rizwan Ahmed,Ahmed Butt,Male,Class 8,B,923301234567,1912-04-26 00:00:00,2024-04-01,Active
+s32,4,Bushra Khalid,Khalid Mahmood,Female,Class 7,B,923312345678,1912-04-26 00:00:00,2024-04-01,Active
+s33,4,Adeel Ashraf,Ashraf Ali,Male,Class 6,B,923323456789,1910-12-13 00:00:00,2024-04-01,Active
+s34,4,Sumera Akram,Akram Gill,Female,Class 5,B,923334567890,1910-12-13 00:00:00,2024-04-01,Active
+s35,5,Naveed Akhtar,Akhtar Rasool,Male,Class 10,B,923345678901,1913-09-08 00:00:00,2023-04-01,Active
