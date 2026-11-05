@@ -1,182 +1,137 @@
-# School Automation Assistant (اسکول آٹومیشن اسسٹنٹ)
+# Fee Recovery Agent
 
-> **WhatsApp-First Automation for Small Private Schools, Academies & Tuition Centers**  
-> *A lightweight, cost-effective automation system designed to eliminate manual administrative overhead, accelerate fee recovery, and streamline exam result delivery.*
+A small terminal assistant for school office staff. It reads fee reminder
+information and collection metrics from the `Fee_Recovery_Demo` Google Sheet and
+answers questions using those sheet values.
 
----
+## Current functionality
 
-## 📌 Executive Summary
+- Lists fee rows in the `Fees` tab where `send_now` is exactly `YES`.
+- Reads billed, collected, pending, collection rate, overdue, and defaulter
+  metrics from the `Dashboard` tab.
+- Answers in simple English or Roman Urdu.
+- Does not calculate fee values itself or write to the spreadsheet.
 
-Small private schools, tuition academies, and Hifz centers operate with lean teams and tight budgets. Today, most still manage their operations using physical paper registers, basic Excel sheets, and manual WhatsApp messaging.
+**WhatsApp sending is not wired into the agent yet.** `python agent.py` only
+answers questions; it will not send reminders or update the sheet.
 
-**School Automation Assistant** automates repetitive administrative operations via a simple stack (**Google Sheets + n8n + WhatsApp Cloud API**). The rollout starts with two high-impact modules:
-1. **Fee Recovery & Defaulter Follow-up** (Direct cash flow impact for owners)
-2. **Automated Exam Result Card Generation** (Massive time-saver for teachers)
+## How the fee-recovery automation works
 
-Once value is proven in the pilot phase, additional automations (attendance alerts, admissions follow-up, and paper checking) are gradually unlocked.
+The Google Sheet is the source of truth and performs the fee calculations. The
+Python agent reads the results; it must not recalculate balances, reminder
+stages, or message text.
 
----
+1. Staff maintain student and fee/payment information in the Google Sheet.
+2. The sheet's formulas use fee data and its `Config` settings (including
+   reminder timing and limits) to calculate each fee's balance, status, days to
+   due, reminder stage, `send_now` decision, and ready-to-send message.
+3. `get_due_reminders` reads only rows whose `send_now` value is exactly `YES`.
+   It returns the fee ID, student name, WhatsApp number, stage, and balance.
+4. `get_summary` reads the totals and collection metrics already shown on the
+   `Dashboard` tab.
+5. The terminal agent uses these tool results to answer staff questions. It
+   does not invent fee figures or compose reminder messages.
 
-## ⚠️ Problems Faced by Small Schools
+### What is and is not automated in this version
 
-- **Delayed Fee Recovery**: Schools lack automated tracking; staff must manually identify defaulters and send reminders one by one.
-- **Wasted Administrative Time**: School owners or headteachers spend 2–3 hours every day on calculations, reconciliations, and follow-ups.
-- **Manual Result Preparation**: Teachers spend days handwriting report cards after exams—calculating totals, percentages, grades, and positions manually.
-- **Teacher Burnout**: Low compensation paired with heavy clerical overhead leads to high teacher turnover.
-- **Communication Gaps**: Parents often receive delayed updates regarding student attendance, exam results, and fee notices.
-- **Lost Admission Inquiries**: Prospective student leads are not systematically tracked, resulting in lost enrollment opportunities.
-- **Existing Software Is Incompatible**: Enterprise school management systems (ERP/LMS) are too expensive, bloated, and complicated for 100–500 student institutions.
+**Working now:** reading eligible reminder rows and dashboard metrics from
+Google Sheets, then answering questions in the terminal.
 
----
+**Not yet an end-to-end automated send flow:** the agent does not send the
+sheet's message through WhatsApp, re-check a row immediately before sending,
+update `last_reminder_date` or `reminder_count`, or append delivery results to
+`Logs`. Although `whatsapp.py` contains a separate Twilio helper, `agent.py`
+does not call it. Do not treat a reminder as sent based on the agent's current
+responses.
 
-## 💡 The Solution
+## Requirements
 
-An accessible, WhatsApp-first automation pipeline:
-- **Fees**: Automated PDF fee voucher creation, scheduled pre-due and post-due reminders, ledger auto-updates, and automated defaulter tracking.
-- **Exam Results**: Teachers simply enter subject marks into a protected sheet or form. The system automatically computes totals, percentages, letter grades, class ranks/positions, generates branded PDF report cards, and delivers them directly to parents via WhatsApp.
-- **Future Expansions**: Absentee alerts, PTM notifications, admission inquiry follow-up, and AI-assisted paper evaluation.
+- Python 3.11 or newer
+- Access to the project Google Sheet
+- A Google service-account JSON key with access to that sheet
+- A Gemini API key for the language model
 
----
+## Setup
 
-## 🎯 Target Audience
+Run these commands from the repository root in PowerShell:
 
-- **Small Private Schools** (100 – 500 students)
-- **Coaching & Tuition Academies** (Matric, FSc, O/A Levels)
-- **Hifz & Quran Academies**
-- **Competitive Coaching Centers** (MDCAT, ECAT, CSS, IELTS)
-
-> **Buyer Persona**: The **School Owner / Principal** is the financial decision-maker. The core value proposition centers on:
-> - Direct cash recovery (faster fee payments)
-> - Hours saved for staff and teachers
-> - Enhanced school reputation and parent satisfaction
-
----
-
-## 🚀 Competitive Advantage & Market Positioning
-
-| Aspect | Enterprise ERPs (e.g. StudentCare.pk) | DIY Registers & Excel | **School Automation Assistant** |
-| :--- | :--- | :--- | :--- |
-| **Parent App Required?** | Yes (often low adoption) | No | **No (Direct WhatsApp message)** |
-| **Cost** | Expensive monthly/setup fees | Free | **Affordable subscription (Rs. 3k–10k/mo)** |
-| **Complexity** | High (steep learning curve) | Manual / Error-prone | **Zero training needed (Google Sheets based)** |
-| **Customizability** | Rigid corporate rules | Manual customization | **Tailored to each school's grading & rules** |
-| **Focus** | Large payment rails (1BILL/Raast) | None | **Immediate fee recovery & communication** |
-
----
-
-## 📋 Comprehensive Feature Matrix (11 Features)
-
-| # | Feature | Build Difficulty | Value to Owner | Rollout Phase |
-|---|---|---|---|---|
-| **1** | **Fee Voucher + Reminders + Defaulter Report** | Easy | 🔥 Very High (Direct cash recovery) | **Phase 1 (MVP)** |
-| **2** | **Result Cards (Marks $\rightarrow$ % $\rightarrow$ Grade $\rightarrow$ PDF $\rightarrow$ WhatsApp)** | Easy | 🔥 Very High (Saves teacher days) | **Phase 1 (MVP)** |
-| **3** | **Absent / Attendance Alerts to Parents** | Easy | Medium | Phase 2 |
-| **4** | **Announcements & PTM Reminders** | Very Easy | Low–Medium | Phase 2 |
-| **5** | **Admission Inquiry Follow-up Workflow** | Medium | High (Increased enrollments) | Phase 2 |
-| **6** | **MCQ Paper Checking Automation** | Medium | Medium | Phase 3 |
-| **7** | **AI Subjective Paper Checking** | Hard | High (High risk, requires validation) | Phase 4 (Research) |
-| **8** | **Teacher Attendance & Salary Sheet** | Medium | Medium | Phase 3 |
-| **9** | **Owner Analytics Dashboard** | Medium | Medium–High | Active / In Progress |
-| **10**| **Parents AI WhatsApp Chatbot** | Medium–Hard | Medium | Phase 4 |
-| **11**| **Weak Student Performance Alerts** | Medium | Medium | Phase 3 |
-
----
-
-## 🎯 Phase 1 Scope: What to Build First (and What to Defer)
-
-### ✅ What We Build First (MVP)
-1. **Fee Recovery Automation**: Demonstrates instant financial ROI (e.g., dropping fee default rates from 40% down to 15%), validating the monthly subscription.
-2. **Automated Result Cards**: Easy to build (formulas + PDF template), high visual delight, and creates immediate teacher buy-in.
-
-### ❌ What We Intentionally Defer (Post-Pilot)
-- AI subjective (long answer) paper checking
-- AI conversational chatbots for parents
-- Custom user auth/login systems
-- Direct online payment gateways / 1BILL / Raast integration
-- Multi-tenant enterprise dashboard
-
----
-
-## 🏗 System Architecture
-
-```mermaid
-flowchart LR
-    A[Staff / Teachers] -->|Enter Marks / Mark Paid| B[(Google Sheets)]
-    B -->|Scheduled / Webhook Triggers| C[n8n Automation Engine]
-    C -->|Docs Template + Apps Script| D[PDF Generation Engine]
-    D -->|Generated Vouchers & Result Cards| C
-    C -->|Official Cloud API| E[WhatsApp]
-    E -->|Automated Delivery| F[Parents]
+```powershell
+cd fee-agent
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 ```
 
-### Architectural Layers
+Create `fee-agent\.env` with:
 
-1. **Data Layer (Google Sheets)**:
-   - `Students`: Student ID, Name, Class, Roll No, Father Name, Parent WhatsApp Number, Monthly Fee.
-   - `Fees`: Student ID, Month, Due Date, Fee Amount, Status (`paid` / `pending` / `overdue`), Paid Date.
-   - `Marks`: Student ID, Exam Type, Subject-wise Marks.
-   - `Config`: School Name, Logo URL, Grade thresholds (A+, A, B, C, F, Pass marks). *Never hardcode grading rules.*
-   - `Logs`: Message delivery timestamp, recipient, status, payload record.
+```env
+GEMINI_API_KEY=your_gemini_api_key
+SHEET_NAME=Fee_Recovery_Demo
+SHEET_ID=your_google_sheet_id
+```
 
-2. **Logic & Automation (n8n)**:
-   - Cron trigger runs daily morning checks.
-   - Reads database rows from Google Sheets, filters overdue/upcoming fees, and routes jobs.
-   - Anti-spam & de-duplication rules (prevents sending multiple reminders to the same parent on the same day).
+Put the service-account key at `fee-agent\service_account.json`. In the Google
+Sheet's **Share** dialog, grant access to the exact `client_email` listed in
+that JSON file. Viewer access is sufficient for the current read-only code.
+The collaborator's personal Google account permission does not replace the
+service account's access.
 
-3. **Document & PDF Generation Engine**:
-   - Google Docs templates with dynamic placeholders (e.g. `{{name}}`, `{{total}}`, `{{grade}}`).
-   - Converted to PDF using Google Apps Script / webhook services.
+## Run
 
-4. **Messaging Layer**:
-   - Meta official **WhatsApp Cloud API** using approved utility message templates.
+From the `fee-agent` directory, activate the virtual environment if needed, then
+run:
 
-5. **Approval Workflow**:
-   - Mandatory **"Preview $\rightarrow$ Approve"** gatekeeper mechanism before triggering mass result card dispatch to prevent sending inaccurate records to parents.
+```powershell
+python sheets.py
+```
 
----
+This checks the Google Sheets connection and prints the rows marked
+`send_now = YES`. To start the chat assistant:
 
-## 🗓 7-Day Implementation Plan (7 Din Ka Plan)
+```powershell
+python agent.py
+```
 
-| Day | Milestone & Core Tasks | Deliverables |
-| :---: | :--- | :--- |
-| **Day 1** | **Setup & Foundation**<br>• Setup Meta Business Manager & WhatsApp Cloud API.<br>• Submit 3–4 official message templates (fee reminder, voucher, result announcement).<br>• Design Google Sheets schema (`Students`, `Fees`, `Marks`, `Config`, `Logs`). | Configured Meta app & initial Google Sheet structure. |
-| **Day 2** | **Fee Reminder Workflow**<br>• Build n8n schedule trigger.<br>• Filter: `Status == 'pending'` AND `DueDate <= Today + 2`.<br>• Send test reminder messages to verified phone numbers. | Working fee reminder automation in n8n. |
-| **Day 3** | **PDF Fee Voucher Engine**<br>• Design Google Docs fee voucher template.<br>• Connect Apps Script / PDF export webhook with n8n.<br>• Send dynamic PDF vouchers via WhatsApp. | Automated PDF voucher creation & delivery. |
-| **Day 4** | **Logging & Anti-Spam Safeguards**<br>• Implement delivery logging into `Logs` sheet.<br>• Add de-duplication logic (maximum 1 message/parent/day).<br>• Auto-generate Defaulters Report sheet for owner review. | Resilient notification logic with spam protection. |
-| **Day 5** | **Result Card Template & Calculation**<br>• Write sheet formulas (total, percentage, grade lookup from `Config`, class position).<br>• Design branded Result Card template in Google Docs. | Accurate grading calculations & report card template. |
-| **Day 6** | **Batch Results Dispatch & Approval**<br>• Add approval trigger ("Generate & Send" checkbox).<br>• Batch PDF generation for the entire class.<br>• End-to-end integration test with sample class data. | Full automated exam result generation pipeline. |
-| **Day 7** | **Polish, Demo Video & Pitch Deck**<br>• Record 2-minute concise product walkthrough video.<br>• Fix edge cases and formatting glitches.<br>• Prepare owner sales pitch script focused on ROI and time-saving. | Production demo & pitch kit ready for school pilots. |
+Ask questions such as:
 
----
+- `Which reminders are due?`
+- `What is the collection rate?`
+- `Overdue balance kitna hai?`
 
-## 🛡 WhatsApp API Considerations & Risk Management
+Type `exit` or `quit` to close the assistant.
 
-1. **Template Approvals**:
-   - Meta requires pre-approval for outbound notification templates. Submit utility templates on Day 1.
-2. **Account Verification**:
-   - Meta test numbers can only message registered test devices. Production pilots require official Business Verification and a dedicated school phone number.
-3. **Ban Prevention**:
-   - **Never** use unofficial scraping or QR-scan libraries (e.g., Baileys/Puppeteer) as they risk permanent number banning. Rely strictly on the official WhatsApp Cloud API.
-4. **Development Fallback**:
-   - If Meta template approvals take longer than expected, continue development through Days 2–6 using test numbers or email fallbacks so progress never blocks.
-5. **Data Privacy**:
-   - Student academic records and phone numbers are sensitive. Restrict Google Sheet permissions and ensure explicit parent opt-in.
+## Secrets and student data
 
----
+- Never commit `.env`, `service_account.json`, API keys, or service-account
+  private keys to GitHub.
+- Share service-account keys only through a secure channel with collaborators
+  who need them. Revoke and replace a key if it is exposed.
+- Keep Google Sheet access limited to authorized staff and the service account.
+- Use fake student data for demos and tests where possible.
 
-## 💰 Business Model & Go-To-Market Next Steps
+## Troubleshooting
 
-### Pricing Strategy
-- **Monthly Retainer**: Rs. 3,000 to Rs. 10,000 / month (depending on student count).
-- **Alternative Per-Student Model**: Small monthly charge per enrolled student (e.g. Rs. 20–30/student/month).
-- **Pilot Strategy**: Offer the first 1–2 schools a free or subsidized 30-day pilot to capture testimonials, measure fee recovery percentage increase, and record time saved.
+- **Missing `.env` value:** Check that `.env` is inside `fee-agent` and includes
+  `GEMINI_API_KEY`, `SHEET_NAME`, and `SHEET_ID`.
+- **Credentials file not found:** Confirm the filename and path are exactly
+  `fee-agent\service_account.json`.
+- **Permission denied or spreadsheet not found:** Confirm the sheet is shared
+  with the JSON file's exact `client_email` and that `SHEET_ID` is correct.
+- **Wrong sheet name:** `SHEET_NAME` must match the title of the spreadsheet
+  identified by `SHEET_ID`.
+- **Google API error:** Make sure Google Sheets API is enabled for the Google
+  Cloud project that owns the service account.
 
-### Immediate Action Items
-1. Interview 5–7 private school and coaching center owners to validate exact pain points.
-2. Audit competitor offerings (e.g., StudentCare.pk) to identify gaps.
-3. Complete the 7-day prototype.
-4. Deploy in 1–2 pilot partner schools and gather case-study metrics.
+## Project files
 
----
-
-*Repository maintained for Apex Academy & partner pilot institutions.*
+```text
+fee-agent/
+  agent.py                 # Terminal chat assistant
+  config.py                # Gemini model configuration
+  sheets.py                # Read-only Google Sheets access
+  tools.py                 # Read-only agent tools
+  whatsapp.py              # Separate Twilio helper; not used by agent.py
+  requirements.txt         # Python dependencies
+  .env                     # Local secrets and sheet settings (not committed)
+  service_account.json     # Local Google credentials (not committed)
+```
